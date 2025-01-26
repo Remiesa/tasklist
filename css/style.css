@@ -1,0 +1,120 @@
+/* style */
+
+/* universal */
+body {
+    font-family: Arial, sans-serif;
+    background-color: black!important;
+}
+
+/* custom */
+.note {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: black;
+}
+.note-header {
+    display: flex;
+    align-items: center;
+}
+.note input[type="text"] {
+    flex: 1;
+    margin-right: 10px;
+    background-color: transparent;
+    color: white;
+}
+.note input[type="checkbox"] {
+    margin-right: 10px;
+    background: white;
+}
+
+.note input[type="text"].checked {
+    text-decoration: line-through;
+}
+
+.note-number {
+    margin-right: 10px;
+}
+.note-date {
+    font-size: 0.9em;
+    color: white;
+    margin-top: 5px;
+}
+
+/* about section */
+
+.about_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.about_section .row {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+.about_section .img-box img {
+    width: 100%;
+}
+
+.long_section {
+    margin-left: 45px;
+    margin-right: 45px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* layout */
+
+.layout_padding {
+    padding: 90px 0;
+}
+
+/* content */
+
+#notes {
+    height: 400px;
+    overflow-y: auto;
+}
+
+#notes::-webkit-scrollbar {
+    width: 4px;
+}
+
+#notes::-webkit-scrollbar-thumb {
+    background-color: white;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-container button {
+    flex-shrink: 0; 
+    background: transparent; 
+    color: white; 
+    border: none;
+}
+
+.input-container input[type="text"] {
+    flex: 1;
+    margin-right: 10px;
+    background: transparent; 
+    color: white;
+}
+  
+.heading_container h2 {
+    position: relative;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.about_section .img-box img {
+    width: 100%;
+}

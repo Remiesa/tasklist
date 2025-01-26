@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" translate="no"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+</head>
+<body>
+
+<section class="about_section layout_padding long_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="detail-box" style="border: 1px solid #fff; border-radius: 5px; padding: 20px;">
+                    <div class="heading_container text-center mb-3">
+                        <h2 class="text-light"><a href="/" style="text-decoration: none; color: white;">TASK LIST</a></h2>
+                    </div>
+                    <div id="notes"></div>
+                    <div class="input-container mt-3">
+                        <input type="text" class="form-control" aria-describedby="basic-addon1" id="newNote" placeholder="Add a new task">
+                        <button id="addButton"><i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+        savedNotes.forEach(note => addNoteToDOM(note.text, note.checked, note.date));
+
+        document.getElementById('addButton').addEventListener('click', () => {
+            const newNoteText = document.getElementById('newNote').value;
+            if (newNoteText.trim() !== '') {
+                const formattedDate = formatDate(new Date());
+                addNoteToDOM(newNoteText, false, formattedDate);
+                saveNotes();
+                document.getElementById('newNote').value = '';
+            }
+        });
+    });
+
+    function addNoteToDOM(text, checked, date) {
+        const notesDiv = document.getElementById('notes');
+        const noteDiv = document.createElement('div');
+        noteDiv.className = 'note';
+
+        noteDiv.innerHTML = `
+            <div class="note-header">
+                <input type="checkbox" ${checked ? 'checked' : ''}>
+                <input type="text" value="${text}" disabled ${checked ? 'class="checked"' : ''}>
+                <button class="edit-button" style="background: transparent; color: white; border: none; ${checked ? 'display: none;' : ''}"><i class="fa fa-pencil"></i></button>
+                <button style="background: transparent; color: white; border: none;"><i class="fa fa-trash"></i></button>
+            </div>
+            <div class="note-date">${date}</div>
+        `;
+
+        const checkbox = noteDiv.querySelector('input[type="checkbox"]');
+        const noteInput = noteDiv.querySelector('input[type="text"]');
+        const editButton = noteDiv.querySelector('.edit-button');
+        const deleteButton = noteDiv.querySelector('button:last-of-type');
+
+        checkbox.addEventListener('change', () => {
+            noteInput.classList.toggle('checked', checkbox.checked);
+            editButton.style.display = checkbox.checked ? 'none' : 'inline';
+            saveNotes();
+        });
+
+        editButton.addEventListener('click', () => {
+            noteInput.disabled = !noteInput.disabled;
+            editButton.innerHTML = noteInput.disabled ? '<i class="fa fa-pencil"></i>' : '<i class="fa fa-check"></i>';
+        });
+
+        deleteButton.addEventListener('click', () => {
+            notesDiv.removeChild(noteDiv);
+            saveNotes();
+        });
+
+        notesDiv.appendChild(noteDiv);
+    }
+
+    function saveNotes() {
+        const notes = Array.from(document.querySelectorAll('.note')).map(noteDiv => ({
+            text: noteDiv.querySelector('input[type="text"]').value,
+            checked: noteDiv.querySelector('input[type="checkbox"]').checked,
+            date: noteDiv.querySelector('.note-date').innerText
+        }));
+        localStorage.setItem('notes', JSON.stringify(notes));
+    }
+
+    function formatDate(date) {
+        const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()} - ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')} WIB`;
+    }
+</script>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
