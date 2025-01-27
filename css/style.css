@@ -20,7 +20,6 @@ body {
 }
 .note input[type="text"] {
     flex: 1;
-    margin-right: 10px;
     background-color: transparent;
     color: white;
 }
