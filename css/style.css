@@ -37,7 +37,7 @@ body {
     margin-right: 10px;
 }
 .note-date {
-    font-size: 0.6em;
+    font-size: 10px;
     color: white;
     margin-top: 5px;
 }
@@ -66,6 +66,12 @@ body {
     margin-right: 45px;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.detail-box {
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 20px;
 }
 
 /* layout */
