@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         noteDiv.innerHTML = `
             <div class="note-header">
                 <input type="checkbox" ${checked ? 'checked' : ''}>
-                <input type="text" value="${text}" disabled ${checked ? 'class="checked form-control"' : 'class="form-control"'}>
+                <input type="text" value="${text}" disabled ${checked ? 'class="checked"' : ''}>
                 <button class="edit-button" style="background: transparent; color: white; border: none; ${checked ? 'display: none;' : ''}"><i class="fa fa-pencil"></i></button>
                 <button class="delete-button" style="background: transparent; color: white; border: none;"><i class="fa fa-trash"></i></button>
             </div>
