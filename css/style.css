@@ -20,11 +20,12 @@ body {
 }
 .note input[type="text"] {
     flex: 1;
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: transparent;
     color: white;
 }
 .note input[type="checkbox"] {
-    margin-right: 10px;
     background: white;
 }
 
