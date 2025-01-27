@@ -24,7 +24,10 @@ body {
     padding-right: 10px;
     background-color: transparent;
     color: white;
+    width: 100%;
+    box-sizing: border-box;
 }
+
 .note input[type="checkbox"] {
     background: white;
 }
